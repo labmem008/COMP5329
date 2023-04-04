@@ -9,6 +9,12 @@ class CrossEntropyLoss(object):
 
     def gradient(self):
         return self.grad
+    
+    def cross_entropy_np(self, x, y):
+        # x_softmax = [self.classifier.forward(x[i]) for i in range(len(x))]
+        x_log = [np.log(x[i][y[i]]) for i in range(len(y))]
+        loss = - np.sum(x_log) / len(y)
+        return loss
 
     def __call__(self, a, y, requires_acc=True):
         '''
@@ -28,8 +34,11 @@ class CrossEntropyLoss(object):
         # L_{i}=-\sum_{j}^{C} y_{ij} \ln a_{ij}
         # 样本的平均损失
         # L_{mean}=\frac{1}{N} \sum_{i}^{N} L_{i}=-\frac{1}{N} \sum_{i}^{N} \sum_{j}^{C} y_{ij} \ln a_{ij}
-        loss = -1 * np.einsum('ij,ij->', y, np.log(a), optimize=True) / y.shape[0]
+        # loss = -1 * np.einsum('ij,ij->', y, np.log(a), optimize=True) / y.shape[0]
+        # loss_ = self.cross_entropy_np(a, y)
+        # print(y.shape, np.log(a).shape)
+        loss = - np.sum(y * np.log(a)) / y.shape[0]
         if requires_acc:
             acc = np.argmax(a, axis=-1) == np.argmax(y, axis=-1)
-            return acc.mean(), loss
+            return acc, loss
         return loss

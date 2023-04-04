@@ -17,7 +17,7 @@ def load(parameters, file):
         parameters[i].data = params[str(i)]
 
 
-def load_MNIST(train_data_path, train_label_path, transform=False):
+def load_data(train_data_path, train_label_path, transform=False):
     X = np.load(open(train_data_path, 'rb'))
     Y = np.load(open(train_label_path, 'rb'))
     if transform:
@@ -26,13 +26,13 @@ def load_MNIST(train_data_path, train_label_path, transform=False):
 
 
 def train(net, loss_fn, train_data_path, train_label_path, batch_size, optimizer, load_file, save_as, times=1, retrain=False):
-    X, Y = load_MNIST(train_data_path, train_label_path, transform=True)
+    X, Y = load_data(train_data_path, train_label_path, transform=True)
     data_size = X.shape[0]
     if not retrain and os.path.isfile(load_file): load(net.parameters, load_file)
     for loop in range(times):
         i = 0
-
-
+        batch_losses = []
+        batch_acces = []
         while i <= data_size - batch_size:
             x = X[i:i+batch_size]
             y = Y[i:i+batch_size]
@@ -43,13 +43,14 @@ def train(net, loss_fn, train_data_path, train_label_path, batch_size, optimizer
             eta = loss_fn.gradient()
             net.backward(eta)
             optimizer.update()
-            if i % 50 == 0:
-                print("loop: %d, batch: %5d, batch acc: %2.1f, batch loss: %.2f" % \
-                    (loop, i, batch_acc*100, batch_loss))
-                
-
-
-                
+            # if i % 50 == 0:
+            #     print("loop: %d, batch: %5d, batch acc: %2.1f, batch loss: %.2f" % \
+            #         (loop, i, batch_acc*100, batch_loss))
+            batch_losses.append(batch_loss)
+            batch_acces.append(batch_acc)
+        epoch_loss = np.average(batch_losses)
+        epoch_acc = np.average(batch_acces)
+        print(f"epoch: {loop}, loss: {epoch_loss}, acc: {epoch_acc}")
         pass
     if save_as is not None: save(net.parameters, save_as)
     
@@ -73,4 +74,4 @@ if __name__ == "__main__":
     train_data_path = './data/train_data.npy'
     train_label_path = './data/train_label.npy'
     # param_file = './data/param.npz'
-    train(net, loss_fn, train_data_path, train_label_path, batch_size, optimizer, None, None, times=20, retrain=True)
+    train(net, loss_fn, train_data_path, train_label_path, batch_size, optimizer, None, None, times=50, retrain=True)

@@ -10,7 +10,9 @@ class Linear(Layer):
         requires_grad: 是否在反向传播中计算权重梯度
         bias: 是否设置偏置
         '''
-        W = np.random.randn(*shape) * (2 / shape[0]**0.5)
+        in_size, out_size = shape
+        # W = np.random.randn(*shape) * (2 / shape[0]**0.5)
+        W = np.random.uniform(low=-np.sqrt(6.0 / (in_size + out_size)),high=np.sqrt(6.0 / (in_size + out_size)),size=(in_size, out_size))
         self.W = Parameter(W, requires_grad)
         self.b = Parameter(np.zeros(shape[-1]), requires_grad) if bias else None
         self.require_grad = requires_grad

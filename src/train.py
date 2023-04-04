@@ -63,9 +63,9 @@ def train(model, train_dataset, test_dataset, patience):
     with tqdm(total=EPOCH, desc=f'Epoch{e}') as pbar:
         for e in range(EPOCH):
             model, train_cls_rpt, train_loss = each_epoch_step(model, train_data)
-            # print(train_cls_rpt)
+            print(train_cls_rpt)
             model, dev_cls_rpt, dev_loss = each_epoch_step(model, dev_data, False)
-            # print(dev_cls_rpt)
+            print(dev_cls_rpt)
             dev_losses.append(dev_loss)
             epoch_nums.append(e)
             plt.clf()
