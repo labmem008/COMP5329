@@ -5,7 +5,8 @@ from parameter import Parameter
 class Linear:
     def __init__(self, in_dim, out_dim):
         # initialize W & b
-        W = np.random.uniform(low=-np.sqrt(6.0 / (in_dim + out_dim)),high=np.sqrt(6.0 / (in_dim + out_dim)),size=(in_dim, out_dim))
+        # kaiming initialization
+        W = np.random.randn(in_dim, out_dim) * (2./in_dim ** 0.5)
         self.W = Parameter(W)
         self.b = Parameter(np.zeros(out_dim))
 
