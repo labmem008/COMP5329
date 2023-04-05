@@ -61,7 +61,7 @@ def train(net, loss_fn, train_data_path, train_label_path, batch_size, optimizer
 
 if __name__ == "__main__": 
     layers = [
-        {'name': 'BatchNorm', 'hyperparam': {'shape': 128, 'requires_grad':True, 'affine':True}},
+        {'name': 'InputNorm', 'hyperparam': {'shape': 128}},
 
         {'name': 'Linear', 'hyperparam': {'in_dim': 128, 'out_dim': 256}},
         {'name': 'BatchNorm', 'hyperparam': {'shape': 256}},

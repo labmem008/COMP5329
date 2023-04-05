@@ -3,6 +3,7 @@ from linear import Linear
 from activations import *
 from batchnorm import BatchNorm
 from dropout import Dropout
+from inputnorm import InputNorm
 
 class Model:
     def __init__(self, layer_configs):
