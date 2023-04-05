@@ -143,9 +143,9 @@ if __name__ == "__main__":
     lr = 0.1
     batch_size = 256
     optimizer = Adam(net.params, lr, decay=1e-5)
-    train_data_path = 'Multilayer-Neural-Network-main//data/train_data.npy'
-    train_label_path = 'Multilayer-Neural-Network-main//data/train_label.npy'
-    test_data_path = 'Multilayer-Neural-Network-main//data/test_data.npy'
-    test_label_path = 'Multilayer-Neural-Network-main//data/test_label.npy'
+    train_data_path = 'Multilayer-Neural-Network-final/data/train_data.npy'
+    train_label_path = 'Multilayer-Neural-Network-final/data/train_label.npy'
+    test_data_path = 'Multilayer-Neural-Network-final/data/test_data.npy'
+    test_label_path = 'Multilayer-Neural-Network-final/data/test_label.npy'
     data_files = (train_data_path, train_label_path, test_data_path, test_label_path)
     train(net, loss_fn, *data_files, batch_size, optimizer, None, None, epoches=100, patience=10, save_result=False, title='Baseline-Momentum')
