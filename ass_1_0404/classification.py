@@ -103,7 +103,7 @@ def train(net, loss_fn, train_data_path, train_label_path, test_data_path, test_
             test_acc = str(test_acc)
             run_time = str(run_time)
             line = ', '.join([title, train_accs, train_losses, dev_accs, dev_losses, test_loss, test_acc, run_time])
-            f = open('ass_1_0404/hyperparam_result.txt', 'a')
+            f = open('ass_1_0404/module_result.txt', 'a')
             f.write(line+'\n')
             f.close()
 
@@ -138,7 +138,7 @@ if __name__ == "__main__":
         {'name': 'Linear', 'hyperparam': {'in_dim': 128, 'out_dim': 16}},
         {'name': 'BatchNorm', 'hyperparam': {'shape': 16}},
         {'name': 'Relu'},
-        {'name': 'Dropout', 'hyperparam': {'drop_rate': 0.5}},
+        # {'name': 'Dropout', 'hyperparam': {'drop_rate': 0.5}},
 
         {'name': 'Linear', 'hyperparam': {'in_dim': 16, 'out_dim': 10}},
     ]
@@ -146,10 +146,10 @@ if __name__ == "__main__":
     net = Model(layers)
     lr = 0.1
     batch_size = 32
-    optimizer = SGD(net.params, lr, decay=5e-4)
+    optimizer = Momentum(net.params, lr, decay=0)
     train_data_path = './data/train_data.npy'
     train_label_path = './data/train_label.npy'
     test_data_path = './data/test_data.npy'
     test_label_path = './data/test_label.npy'
     data_files = (train_data_path, train_label_path, test_data_path, test_label_path)
-    train(net, loss_fn, *data_files, batch_size, optimizer, None, None, epoches=100, patience=10, save_result=True, title='Baseline-weight-decay-5e-4')
+    train(net, loss_fn, *data_files, batch_size, optimizer, None, None, epoches=100, patience=10, save_result=True, title='Baseline-Momentum')
