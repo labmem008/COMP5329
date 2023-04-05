@@ -86,13 +86,14 @@ def train(net, loss_fn, train_data_path, train_label_path, test_data_path, test_
             else:
                 p += 1
             if p > patience:
+                print('Early Stop!')
                 break
         net.test_mode()
         start_time = time.time()
         test_acc, test_loss, test_rpt = test(best_model, loss_fn, test_X, test_Y)
         run_time = time.time() - start_time
         test_acc = np.average(test_acc)
-        print(f'epoch_loss: {round(test_loss, 4)}, acc: {round(test_acc, 4)*100}%\n{test_rpt}')
+        print(f'test_loss: {round(test_loss, 4)}, test_acc: {round(test_acc, 4)*100}%\n{test_rpt}')
         if save_as is not None: save(net.parameters, save_as)
         if save_result:
             train_accs = '|'.join([str(i) for i in train_accs])
