@@ -65,27 +65,27 @@ if __name__ == "__main__":
 
         {'name': 'Linear', 'hyperparam': {'in_dim': 128, 'out_dim': 256}},
         {'name': 'BatchNorm', 'hyperparam': {'shape': 256}},
-        {'name': 'Relu'},
+        {'name': 'Gelu'},
         {'name': 'Dropout', 'hyperparam': {'drop_rate': 0.4}},
 
         {'name': 'Linear', 'hyperparam': {'in_dim': 256, 'out_dim': 512}},
         {'name': 'BatchNorm', 'hyperparam': {'shape': 512}},
-        {'name': 'Relu'},
+        {'name': 'Gelu'},
         # {'name': 'Dropout', 'hyperparam': {'drop_rate': 0.2}},
 
         {'name': 'Linear', 'hyperparam': {'in_dim': 512, 'out_dim': 256}},
         {'name': 'BatchNorm', 'hyperparam': {'shape': 256}},
-        {'name': 'Relu'},
+        {'name': 'Gelu'},
         # {'name': 'Dropout', 'hyperparam': {'drop_rate': 0.2}},
 
         {'name': 'Linear', 'hyperparam': {'in_dim': 256, 'out_dim': 128}},
         {'name': 'BatchNorm', 'hyperparam': {'shape': 128}},
-        {'name': 'Relu'},
+        {'name': 'Gelu'},
         # {'name': 'Dropout', 'hyperparam': {'drop_rate': 0.2}},
 
         {'name': 'Linear', 'hyperparam': {'in_dim': 128, 'out_dim': 16}},
         {'name': 'BatchNorm', 'hyperparam': {'shape': 16}},
-        {'name': 'Relu'},
+        {'name': 'Gelu'},
         # {'name': 'Dropout', 'hyperparam': {'drop_rate': 0.2}},
 
         {'name': 'Linear', 'hyperparam': {'in_dim': 16, 'out_dim': 10}},

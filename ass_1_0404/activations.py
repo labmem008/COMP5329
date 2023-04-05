@@ -17,6 +17,7 @@ class Relu:
 class Gelu:
     def forward(self, x):
         self.out = 0.5 * x * (1 + np.tanh(np.sqrt(2/np.pi) * (x + 0.044715 * x ** 3)))
+        return self.out
 
     def backward(self, eta):
         self.grad = ((np.tanh((np.sqrt(2) * (0.044715 * self.out ** 3 + self.out)) / np.sqrt(np.pi)) + ((np.sqrt(2) * self.out * (
