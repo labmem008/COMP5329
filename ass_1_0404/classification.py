@@ -12,6 +12,7 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 
 
+
 softmax = Softmax()
 
 def save(parameters, save_as):
@@ -112,7 +113,7 @@ def test(net, loss_fn, data, label):
     output = net.forward(data)
     prediction = softmax.forward(output)
     acc, loss = loss_fn(output, label)
-    rpt = classification_report(np.argmax(label, axis=1), np.argmax(prediction, axis=1))
+    rpt = classification_report(np.argmax(label, axis=1), np.argmax(prediction, axis=1), zero_division=1)
     return acc, loss, rpt
 
 
@@ -128,14 +129,6 @@ if __name__ == "__main__":
         
         {'name': 'Linear', 'hyperparam': {'in_dim': 128, 'out_dim': 256}},
         {'name': 'BatchNorm', 'hyperparam': {'shape': 256}},
-        {'name': 'Relu'},
-
-        # {'name': 'Linear', 'hyperparam': {'in_dim': 256, 'out_dim': 768}},
-        # {'name': 'BatchNorm', 'hyperparam': {'shape': 768}},
-        # {'name': 'Relu'},
-
-        # {'name': 'Linear', 'hyperparam': {'in_dim': 768, 'out_dim': 256}},
-        # {'name': 'BatchNorm', 'hyperparam': {'shape': 256}},
         {'name': 'Relu'},
 
         {'name': 'Linear', 'hyperparam': {'in_dim': 256, 'out_dim': 128}},
