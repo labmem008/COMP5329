@@ -24,7 +24,7 @@ class BatchNorm:
             sample_diff = x - sample_ave
             self.normalized = sample_diff / sample_std
             self.gamma_s = self.gamma.data / sample_std
-            return self.gamma.data * self.normalized + self.beta.data
+        return self.gamma.data * self.normalized + self.beta.data
             
 
     def backward(self, eta):         
