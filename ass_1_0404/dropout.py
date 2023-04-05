@@ -1,6 +1,5 @@
 import numpy as np
 
-# 随机失活
 class Dropout:
     def __init__(self, drop_rate, is_test=False, **kwargs):
         self.drop_rate = drop_rate
@@ -12,10 +11,10 @@ class Dropout:
             return x
         else:
             self.mask = np.random.uniform(0, 1, x.shape) > self.drop_rate
-            return np.einsum('...,...,->...', x, self.mask, self.fix_value, optimize=self.first_forward)
+            return x * self.mask * self.fix_value
 
     def backward(self, eta):
         if self.is_test:
             return eta
         else:
-            return np.einsum('...,...->...', eta, self.mask, optimize=self.first_backward)
+            return eta * self.mask
