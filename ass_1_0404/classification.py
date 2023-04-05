@@ -145,11 +145,11 @@ if __name__ == "__main__":
     loss_fn = CrossEntropy()
     net = Model(layers)
     lr = 0.1
-    batch_size = 64
-    optimizer = Adam(net.params, lr, decay=0)
+    batch_size = 32
+    optimizer = SGD(net.params, lr, decay=5e-4)
     train_data_path = './data/train_data.npy'
     train_label_path = './data/train_label.npy'
     test_data_path = './data/test_data.npy'
     test_label_path = './data/test_label.npy'
     data_files = (train_data_path, train_label_path, test_data_path, test_label_path)
-    train(net, loss_fn, *data_files, batch_size, optimizer, None, None, epoches=100, patience=10, save_result=True, title='Baseline-Adam-batchsize:64')
+    train(net, loss_fn, *data_files, batch_size, optimizer, None, None, epoches=100, patience=10, save_result=True, title='Baseline-weight-decay-5e-4')
