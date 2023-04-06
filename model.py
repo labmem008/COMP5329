@@ -17,6 +17,7 @@ class Model:
                 # Instantiate layer objects
                 hyperparam = config.get('hyperparam', None)
                 if hyperparam is not None:
+                    # create layer by using layer name -> eval(layer_name:str)
                     layer = eval(f"{config['name']}(**hyperparam)")
                 else:
                     layer = eval(f"{config['name']}()")
